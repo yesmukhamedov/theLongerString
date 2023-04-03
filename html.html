@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>fl</title>
+	</head>
+	<body>
+		<div align='center' id='main'><h4>Result is: <span id='result'></span></h4></div>
+		<script>
+			let index = 0;
+			let table = document.createElement('table');
+			table.border = 5;
+			const header = document.createElement('tr');
+			const add = document.createElement('td');
+			const adder = document.createElement('button');
+			adder.innerHTML = 'add new element';
+			adder.onclick = createNewInput;
+			add.appendChild(adder);
+			const calculate = document.createElement('button');
+			calculate.innerHTML = 'calculate';
+			calculate.onclick = calculation;
+			add.appendChild(calculate);
+			header.appendChild(add);
+			table.appendChild(header);
+			
+			document.getElementById('main').appendChild(table);
+			
+			function createNewInput(){
+				let tr = document.createElement('tr');
+				let td = document.createElement('td');
+				let div = document.createElement('div');
+				div.align = 'center';
+				let input = document.createElement('input');
+				input.id = `${index}`;
+				index++;
+				
+				div.appendChild(input);
+				td.appendChild(div);
+				tr.appendChild(td);
+				table.appendChild(tr);
+			}
+			
+			function calculation(){
+				let array = [];
+				
+				for(let i=0; i<index; i++){
+					array.push(document.getElementById(`${i}`).value);
+				}
+				
+				document.getElementById('result').innerHTML = array.reduce((result, item)=>{
+					let res = '';
+					for(let i=0; i<result.length; i++){
+						if(result[i] === item[i])
+							res = res + result[i];
+					}
+					return res;
+				}, array[0]);
+			}
+		</script>
+	</body>
+</html>
